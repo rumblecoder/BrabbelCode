@@ -1,0 +1,40 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity"
+    tools:ignore="MergeRootFrame">
+
+    <LinearLayout
+        android:layout_height="50dp"
+        android:layout_width="match_parent"
+        android:orientation="horizontal">
+        <CheckBox
+            android:id="@+id/micCheck"
+            android:text="Mic off"
+            android:layout_height="50dp"
+            android:layout_width="90dp"
+            android:onClick="onMicCheckClicked"
+            android:checked="false"
+            android:enabled="true" />
+        <CheckBox
+            android:id="@+id/themeCheck"
+            android:text="Dark Theme"
+            android:layout_height="50dp"
+            android:layout_width="125dp"
+            android:onClick="onThemeCheckClicked"
+            android:checked="false"
+            android:enabled="true" />
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/codeEditor"
+        android:inputType="textMultiLine|textNoSuggestions"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:typeface="monospace"
+        android:gravity="top" />
+
+</LinearLayout>
