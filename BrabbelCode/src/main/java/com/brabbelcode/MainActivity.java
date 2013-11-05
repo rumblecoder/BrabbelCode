@@ -40,7 +40,7 @@ public class MainActivity extends Activity {
         }
     }
 
-    /** 
+    /**
      * Events
      */
     public void onMicCheckClicked(View view) {
