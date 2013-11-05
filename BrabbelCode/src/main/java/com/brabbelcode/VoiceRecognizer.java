@@ -26,6 +26,7 @@ public class VoiceRecognizer implements RecognitionListener {
     private Intent intent;
     private boolean isPresent;
     private EditText output;
+    private EditText debugBox;
 
     /**
      * Ctor
@@ -83,6 +84,7 @@ public class VoiceRecognizer implements RecognitionListener {
     public void setOutput(EditText editText){
         output = editText;
     }
+    public void setDebug(EditText editText) { debugBox = editText; }
 
     /**
      * Getter
@@ -150,6 +152,10 @@ public class VoiceRecognizer implements RecognitionListener {
 
         if(matches != null)
         {
+            debugBox.setText("");
+            for(String s:matches){
+                debugBox.setText(debugBox.getText() + "\n" + s);
+            }
 
             for(String s:matches)
             {

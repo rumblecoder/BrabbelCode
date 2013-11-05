@@ -18,6 +18,7 @@ public class MainActivity extends Activity {
 
     private VoiceRecognizer recognizer;
     private EditText codeEditor;
+    private EditText debugBox;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +26,8 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
 
         codeEditor = (EditText) findViewById(R.id.codeEditor);
+        debugBox = (EditText) findViewById(R.id.debugBox);
+
         SyntaxHighlighter.watchTextField(codeEditor);
 
         recognizer = new VoiceRecognizer(this);
@@ -32,6 +35,7 @@ public class MainActivity extends Activity {
             Toast.makeText(this, "Voice recognizer not present", Toast.LENGTH_SHORT).show();
         else{
             recognizer.setOutput(codeEditor);
+            recognizer.setDebug(debugBox);
             recognizer.start();
         }
     }

@@ -29,12 +29,24 @@
             android:enabled="true" />
     </LinearLayout>
 
-    <EditText
-        android:id="@+id/codeEditor"
-        android:inputType="textMultiLine|textNoSuggestions"
-        android:layout_height="match_parent"
+    <LinearLayout
+        android:layout_height="fill_parent"
         android:layout_width="match_parent"
-        android:typeface="monospace"
-        android:gravity="top" />
+        android:orientation="vertical">
+        <EditText
+            android:id="@+id/codeEditor"
+            android:inputType="textMultiLine|textNoSuggestions"
+            android:layout_height="250dp"
+            android:layout_width="match_parent"
+            android:typeface="monospace"
+            android:gravity="top" />
+        <EditText
+            android:id="@+id/debugBox"
+            android:inputType="textMultiLine|textNoSuggestions"
+            android:layout_height="250dp"
+            android:layout_width="match_parent"
+            android:typeface="monospace"
+            android:gravity="top" />
+    </LinearLayout>
 
 </LinearLayout>
