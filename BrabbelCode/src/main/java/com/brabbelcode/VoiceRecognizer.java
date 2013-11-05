@@ -145,10 +145,14 @@ public class VoiceRecognizer implements RecognitionListener {
     public void onResults(Bundle data)
     {
         ArrayList<String> matches = data.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
+        InputTranslator translator = new InputTranslator();
+
 
         if(!matches.isEmpty())
         {
-            if(matches.get(0).contains("new line"))
+            output.setText(output.getText() + "\n"+translator.translateInput(matches.get(0)));
+
+            /*if(matches.get(0).contains("new line"))
                 output.setText(output.getText() + "\n");
             else if(matches.get(0).contains("tab"))
                 output.setText(output.getText() + "\t");
@@ -164,6 +168,7 @@ public class VoiceRecognizer implements RecognitionListener {
                 output.setText(output.getText() + "public class person{\n\n\tpublic person(){\n\t}\n\n}");
             else
                 output.setText(output.getText() + " " + matches.get(0) + "\n");
+                */
         }
 
         start();
