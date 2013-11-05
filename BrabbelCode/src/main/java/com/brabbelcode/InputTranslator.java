@@ -8,10 +8,12 @@ package com.brabbelcode;
 public class InputTranslator {
 
     private double tolerance;
+    private String mode;
 
     public InputTranslator()
     {
         this.tolerance = 0.6;
+        this.mode = "freeMode";
     }
 
     public String translateInput(String speechResult)
@@ -23,6 +25,7 @@ public class InputTranslator {
         {
             if(compareWords(speechResultArray[0], "create") || compareWords(speechResultArray[0], "make"))
             {
+                mode = "create";
                 if(compareWords(speechResultArray[1], "class"))
                 {
                     if(compareWords(speechResultArray[2], "person"))
@@ -44,6 +47,7 @@ public class InputTranslator {
         return result;
     }
 
+
     private boolean compareWords(String speechResult, String originalWord)
     {
         int levDist = LevenshteinDistance.computeLevenshteinDistance(speechResult, originalWord);
@@ -51,6 +55,12 @@ public class InputTranslator {
             return true;
         else
             return false;
+    }
+
+
+    public String Mode()
+    {
+        return this.mode;
     }
 
 

@@ -148,9 +148,18 @@ public class VoiceRecognizer implements RecognitionListener {
         InputTranslator translator = new InputTranslator();
 
 
-        if(!matches.isEmpty())
+        if(matches != null)
         {
-            output.setText(output.getText() + "\n"+translator.translateInput(matches.get(0)));
+
+            for(String s:matches)
+            {
+                String translatorResult = translator.translateInput(s);
+                if(translatorResult != "test")
+                {
+                    output.setText(output.getText() + "\n"+ translatorResult);
+                    break;
+                }
+            }
 
             /*if(matches.get(0).contains("new line"))
                 output.setText(output.getText() + "\n");
