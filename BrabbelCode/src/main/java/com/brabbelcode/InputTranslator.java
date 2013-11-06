@@ -28,20 +28,30 @@ public class InputTranslator {
                 mode = "create";
                 if(compareWords(speechResultArray[1], "class"))
                 {
-                    if(compareWords(speechResultArray[2], "person"))
-
-                        result = "public class person{\n\n\tpublic person(){\n\t}\n\n}";
+                    result = "public class "+speechResultArray[2]+ "{\n\n\tpublic "+speechResultArray[2]+"(){\n\t}\n\n}";
                 }
 
             }
 
 
         }
-        if(speechResultArray.length == 2)
+        else if(speechResultArray.length == 2)
         {
-            if(compareWords(speechResultArray[0], "new"))
+            if(compareWords(speechResultArray[0], "next"))
+            {
                 if(compareWords(speechResultArray[1],"line"))
-                    result = "\n";
+                    result = "neue Line\n";
+            }
+            else if(compareWords(speechResultArray[0], "exit"))
+            {
+                    if(compareWords(speechResultArray[1],"mode"))
+                        result = "levaing mode";
+            }
+            else if (compareWords(speechResultArray[0], "create"))
+            {
+                        if(compareWords(speechResultArray[1],"function"))
+                            result = "function(){\n}";
+            }
         }
 
         return result;

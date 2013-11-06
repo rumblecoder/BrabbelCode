@@ -152,19 +152,22 @@ public class VoiceRecognizer implements RecognitionListener {
 
         if(matches != null)
         {
-            debugBox.setText("");
-            for(String s:matches){
-                debugBox.setText(debugBox.getText() + "\n" + s);
-            }
+
+            boolean matchString = false;
 
             for(String s:matches)
             {
                 String translatorResult = translator.translateInput(s);
                 if(translatorResult != "test")
                 {
+                    matchString = true;
                     output.setText(output.getText() + "\n"+ translatorResult);
                     break;
                 }
+            }
+            debugBox.setText("match string: "+matchString);
+            for(String s:matches){
+                debugBox.setText(debugBox.getText() + "\n" + s);
             }
 
             /*if(matches.get(0).contains("new line"))
