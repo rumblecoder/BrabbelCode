@@ -44,13 +44,22 @@ public class InputTranslator {
             }
             else if(compareWords(speechResultArray[0], "exit"))
             {
-                    if(compareWords(speechResultArray[1],"mode"))
-                        result = "levaing mode";
+                if(compareWords(speechResultArray[1],"mode"))
+                    result = "levaing mode";
             }
             else if (compareWords(speechResultArray[0], "create"))
             {
-                        if(compareWords(speechResultArray[1],"function"))
-                            result = "function(){\n}";
+                if(compareWords(speechResultArray[1],"function"))
+                    result = "function(){\n}";
+            }
+
+            /* Selection- / DeletionHandler Strings */
+            else if (compareWords(speechResultArray[0], "select") && compareWords(speechResultArray[1], "all")) {
+                result = "select all";
+            } else if (compareWords(speechResultArray[0], "select") && compareWords(speechResultArray[1], "none")) {
+                result = "select none";
+            } else if (compareWords(speechResultArray[0], "delete") && compareWords(speechResultArray[1], "all")) {
+                result = "delete all";
             }
         }
 

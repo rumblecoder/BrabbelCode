@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.ActionBar;
 import android.app.Fragment;
 import android.os.Bundle;
+import android.speech.SpeechRecognizer;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -31,6 +32,7 @@ public class MainActivity extends Activity {
         SyntaxHighlighter.watchTextField(codeEditor);
 
         recognizer = new VoiceRecognizer(this);
+
         if(!recognizer.getIsPresent())
             Toast.makeText(this, "Voice recognizer not present", Toast.LENGTH_SHORT).show();
         else{

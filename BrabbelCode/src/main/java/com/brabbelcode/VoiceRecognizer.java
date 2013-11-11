@@ -83,6 +83,9 @@ public class VoiceRecognizer implements RecognitionListener {
      */
     public void setOutput(EditText editText){
         output = editText;
+
+        SelectionHandler.getInstance().init(editText);
+        DeletionHandler.getInstance().init(editText);
     }
     public void setDebug(EditText editText) { debugBox = editText; }
 
@@ -158,14 +161,22 @@ public class VoiceRecognizer implements RecognitionListener {
             for(String s:matches)
             {
                 String translatorResult = translator.translateInput(s);
-                if(translatorResult != "test")
-                {
+                if(translatorResult == "select all") {
+                    matchString = true;
+                    SelectionHandler.getInstance().selectAll();
+                } else if (translatorResult == "select none") {
+                    matchString = true;
+                    SelectionHandler.getInstance().selectNone();
+                } else if (translatorResult == "delete all") {
+                    matchString = true;
+                    DeletionHandler.getInstance().deleteAll();
+                } else if(translatorResult != "test") {
                     matchString = true;
                     output.setText(output.getText() + "\n"+ translatorResult);
                     break;
                 }
             }
-            debugBox.setText("match string: "+matchString);
+            debugBox.setText("match string: " + matchString);
             for(String s:matches){
                 debugBox.setText(debugBox.getText() + "\n" + s);
             }
