@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 /**
  * Created by Tobias on 01.11.13.
@@ -24,6 +25,8 @@ public class Theme {
         CheckBox checkBox1 = (CheckBox) activity.findViewById(R.id.themeCheck);
         checkBox1.setTextColor(Color.argb(255, 0, 0, 0));
         checkBox1.setHighlightColor(Color.argb(255, 0, 0, 0));
+        TextView textView = (TextView) activity.findViewById(R.id.modeText);
+        textView.setTextColor(Color.argb(255, 0, 0, 0));
 
         isDark = false;
     }
@@ -39,6 +42,8 @@ public class Theme {
         CheckBox checkBox1 = (CheckBox) activity.findViewById(R.id.themeCheck);
         checkBox1.setTextColor(Color.argb(255, 255, 255, 255));
         checkBox1.setHighlightColor(Color.argb(255, 255, 255, 255));
+        TextView textView = (TextView) activity.findViewById(R.id.modeText);
+        textView.setTextColor(Color.argb(255, 255, 255, 255));
 
         isDark = true;
     }

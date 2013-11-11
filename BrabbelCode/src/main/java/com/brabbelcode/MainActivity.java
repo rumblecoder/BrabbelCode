@@ -1,18 +1,11 @@
 package com.brabbelcode;
 
 import android.app.Activity;
-import android.app.ActionBar;
-import android.app.Fragment;
 import android.os.Bundle;
-import android.speech.SpeechRecognizer;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.os.Build;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends Activity {
@@ -30,6 +23,8 @@ public class MainActivity extends Activity {
         debugBox = (EditText) findViewById(R.id.debugBox);
 
         SyntaxHighlighter.watchTextField(codeEditor);
+        Mode.setOutput((TextView) findViewById(R.id.modeText));
+        Mode.switchToFree();
 
         recognizer = new VoiceRecognizer(this);
 

@@ -27,6 +27,13 @@
             android:onClick="onThemeCheckClicked"
             android:checked="false"
             android:enabled="true" />
+        <TextView
+            android:id="@+id/modeText"
+            android:layout_height="20dp"
+            android:layout_width="match_parent"
+            android:textSize="16sp"
+            android:layout_marginLeft="10dp"
+            android:text="Mode:" />
     </LinearLayout>
 
     <LinearLayout
