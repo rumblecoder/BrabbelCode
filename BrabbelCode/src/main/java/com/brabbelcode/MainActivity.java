@@ -13,6 +13,7 @@ public class MainActivity extends Activity {
     private VoiceRecognizer recognizer;
     private EditText codeEditor;
     private EditText debugBox;
+    private TextView modeLabel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,10 +22,11 @@ public class MainActivity extends Activity {
 
         codeEditor = (EditText) findViewById(R.id.codeEditor);
         debugBox = (EditText) findViewById(R.id.debugBox);
+        modeLabel = (TextView) findViewById(R.id.modeText);
 
         SyntaxHighlighter.watchTextField(codeEditor);
-        Mode.setOutput((TextView) findViewById(R.id.modeText));
-        Mode.switchToFree();
+        //Mode.setOutput((TextView) findViewById(R.id.modeText));
+        //Mode.switchToFree();
 
         recognizer = new VoiceRecognizer(this);
 
@@ -33,6 +35,7 @@ public class MainActivity extends Activity {
         else{
             recognizer.setOutput(codeEditor);
             recognizer.setDebug(debugBox);
+            recognizer.setModeBox(modeLabel);
             recognizer.start();
         }
     }

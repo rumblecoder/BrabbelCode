@@ -8,36 +8,23 @@ package com.brabbelcode;
 public class InputTranslator {
 
     private double tolerance;
-    private String mode;
 
     public InputTranslator()
     {
         this.tolerance = 0.6;
-        this.mode = "freeMode";
     }
 
-    public String translateInput(String speechResult)
+    public String translateCreate(String[] speechResultArray)
     {
-        String result = "test";
-        String [] speechResultArray = speechResult.split(" ");
+        String result = "";
 
-        if(speechResultArray.length == 3)
+        if(speechResultArray.length == 2)
         {
-            if(compareWords(speechResultArray[0], "create") || compareWords(speechResultArray[0], "make"))
+            if(compareWords(speechResultArray[0], "class"))
             {
-                mode = "create";
-                if(compareWords(speechResultArray[1], "class"))
-                {
-                    result = "public class "+speechResultArray[2]+ "{\n\n\tpublic "+speechResultArray[2]+"(){\n\t}\n\n}";
-                }
-
+                result = "public class "+speechResultArray[1]+ "{\n\n\tpublic "+speechResultArray[1]+"(){\n\t}\n\n}";
             }
-
-
-        }
-        else if(speechResultArray.length == 2)
-        {
-            if(compareWords(speechResultArray[0], "next"))
+            else if(compareWords(speechResultArray[0], "next"))
             {
                 if(compareWords(speechResultArray[1],"line"))
                     result = "neue Line\n";
@@ -52,20 +39,36 @@ public class InputTranslator {
                 if(compareWords(speechResultArray[1],"function"))
                     result = "function(){\n}";
             }
-
-            /* Selection- / DeletionHandler Strings */
-            else if (compareWords(speechResultArray[0], "select") && compareWords(speechResultArray[1], "all")) {
-                result = "select all";
-            } else if (compareWords(speechResultArray[0], "select") && compareWords(speechResultArray[1], "none")) {
-                result = "select none";
-            } else if (compareWords(speechResultArray[0], "delete") && compareWords(speechResultArray[1], "all")) {
-                result = "delete all";
-            }
         }
 
         return result;
     }
+    public String translateSelect(String[] speechResultArray) {
+        String result = "";
 
+        if (compareWords(speechResultArray[0], "all")) {
+            result = "all";
+        } else if (compareWords(speechResultArray[0], "none")) {
+            result = "none";
+        }
+        return result;
+    }
+    public String translateDelete(String[] speechResultArray) {
+        String result = "";
+
+        if (compareWords(speechResultArray[0], "all")) {
+            result = "all";
+        }
+        return result;
+    }
+    public String translateFree(String[] speechResultArray) {
+        String result = "";
+
+        for(int i = 0; i < speechResultArray.length; i++) {
+            result = result + speechResultArray[i] + " ";
+        }
+        return result;
+    }
 
     private boolean compareWords(String speechResult, String originalWord)
     {
@@ -75,14 +78,4 @@ public class InputTranslator {
         else
             return false;
     }
-
-
-    public String Mode()
-    {
-        return this.mode;
-    }
-
-
-
-
 }

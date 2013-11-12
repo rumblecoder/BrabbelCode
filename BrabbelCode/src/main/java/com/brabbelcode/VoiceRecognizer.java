@@ -8,6 +8,7 @@ import android.speech.RecognitionListener;
 import android.speech.RecognizerIntent;
 import android.speech.SpeechRecognizer;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -27,6 +28,7 @@ public class VoiceRecognizer implements RecognitionListener {
     private boolean isPresent;
     private EditText output;
     private EditText debugBox;
+    private TextView modeLabel;
 
     /**
      * Ctor
@@ -82,12 +84,17 @@ public class VoiceRecognizer implements RecognitionListener {
      * Setter
      */
     public void setOutput(EditText editText){
-        output = editText;
+        this.output = editText;
 
         SelectionHandler.getInstance().init(editText);
         DeletionHandler.getInstance().init(editText);
+
     }
-    public void setDebug(EditText editText) { debugBox = editText; }
+    public void setDebug(EditText editText) { this.debugBox = editText; }
+    public void setModeBox(TextView editText) {
+        this.modeLabel = editText;
+        Mode.getInstance().init(editText);
+    }
 
     /**
      * Getter
@@ -160,19 +167,38 @@ public class VoiceRecognizer implements RecognitionListener {
 
             for(String s:matches)
             {
-                String translatorResult = translator.translateInput(s);
-                if(translatorResult == "select all") {
-                    matchString = true;
-                    SelectionHandler.getInstance().selectAll();
-                } else if (translatorResult == "select none") {
-                    matchString = true;
-                    SelectionHandler.getInstance().selectNone();
-                } else if (translatorResult == "delete all") {
-                    matchString = true;
-                    DeletionHandler.getInstance().deleteAll();
-                } else if(translatorResult != "test") {
+                String [] speechResultArray = s.split(" ");
+                speechResultArray = Mode.getInstance().extractMode(speechResultArray);
+                String mode = Mode.getInstance().getMode();
+                String translatorResult;
+
+
+                if(mode.equals("create")) {
+                    translatorResult = translator.translateCreate(speechResultArray);
                     matchString = true;
                     output.setText(output.getText() + "\n"+ translatorResult);
+                    break;
+                } else if(mode.equals("select")) {
+                    translatorResult = translator.translateSelect(speechResultArray);
+                    if(translatorResult.equals("all")) {
+                        matchString = true;
+                        SelectionHandler.getInstance().selectAll();
+                    } else if(translatorResult.equals("none")) {
+                        matchString = true;
+                        SelectionHandler.getInstance().selectNone();
+                    }
+                    break;
+                } else if(mode.equals("delete")) {
+                    translatorResult = translator.translateDelete(speechResultArray);
+                    if(translatorResult.equals("all")) {
+                        matchString = true;
+                        DeletionHandler.getInstance().deleteAll();
+                    }
+                    break;
+                } else if(mode.equals("free")) {
+                    translatorResult = translator.translateFree(speechResultArray);
+                    matchString = true;
+                    output.setText(output.getText() + "\n" + translatorResult);
                     break;
                 }
             }

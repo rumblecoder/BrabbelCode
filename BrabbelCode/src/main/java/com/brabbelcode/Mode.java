@@ -1,13 +1,49 @@
 package com.brabbelcode;
 
+import android.widget.EditText;
 import android.widget.TextView;
 
 import java.util.Arrays;
-import java.util.List;
 
-/**
- * Created by Tobias on 11.11.13.
- */
+public class Mode {
+    private static final Mode instance = new Mode();
+    private TextView textView;
+    private String mode;
+    private String[] out;
+
+    private Mode() {
+
+    }
+    public void init(TextView textView) {
+        this.textView = textView;
+    }
+    public static Mode getInstance() {
+        return instance;
+    }
+
+    public String[] extractMode(String[] arr) {
+        if(arr[0].equals("create")) {
+            this.mode = "create";
+            out = Arrays.copyOfRange(arr, 1, arr.length);
+        } else if(arr[0].equals("select")) {
+            this.mode = "select";
+            out = Arrays.copyOfRange(arr, 1, arr.length);
+        } else if(arr[0].equals("delete")) {
+            this.mode = "delete";
+            out = Arrays.copyOfRange(arr, 1, arr.length);
+        } else {
+            this.mode = "free";
+            out = Arrays.copyOfRange(arr, 0, arr.length);
+        }
+        this.textView.setText(this.mode);
+        return out;
+    }
+    public String getMode() {
+        return this.mode;
+    }
+}
+
+/*
 public class Mode {
 
     private static TextView output;
@@ -53,3 +89,4 @@ public class Mode {
         output.setText("Mode: " + mode);
     }
 }
+*/
