@@ -25,8 +25,6 @@ public class MainActivity extends Activity {
         modeLabel = (TextView) findViewById(R.id.modeText);
 
         SyntaxHighlighter.watchTextField(codeEditor);
-        //Mode.setOutput((TextView) findViewById(R.id.modeText));
-        //Mode.switchToFree();
 
         recognizer = new VoiceRecognizer(this);
 

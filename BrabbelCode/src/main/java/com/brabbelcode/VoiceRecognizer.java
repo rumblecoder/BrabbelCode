@@ -173,12 +173,12 @@ public class VoiceRecognizer implements RecognitionListener {
                 String translatorResult;
 
 
-                if(mode.equals("create")) {
+                if(mode.equals(ModeEnum.CREATE)) {
                     translatorResult = translator.translateCreate(speechResultArray);
                     matchString = true;
                     output.setText(output.getText() + "\n"+ translatorResult);
                     break;
-                } else if(mode.equals("select")) {
+                } else if(mode.equals(ModeEnum.SELECT)) {
                     translatorResult = translator.translateSelect(speechResultArray);
                     if(translatorResult.equals("all")) {
                         matchString = true;
@@ -188,14 +188,14 @@ public class VoiceRecognizer implements RecognitionListener {
                         SelectionHandler.getInstance().selectNone();
                     }
                     break;
-                } else if(mode.equals("delete")) {
+                } else if(mode.equals(ModeEnum.DELETE)) {
                     translatorResult = translator.translateDelete(speechResultArray);
                     if(translatorResult.equals("all")) {
                         matchString = true;
                         DeletionHandler.getInstance().deleteAll();
                     }
                     break;
-                } else if(mode.equals("free")) {
+                } else if(mode.equals(ModeEnum.FREE)) {
                     translatorResult = translator.translateFree(speechResultArray);
                     matchString = true;
                     output.setText(output.getText() + "\n" + translatorResult);
@@ -207,23 +207,6 @@ public class VoiceRecognizer implements RecognitionListener {
                 debugBox.setText(debugBox.getText() + "\n" + s);
             }
 
-            /*if(matches.get(0).contains("new line"))
-                output.setText(output.getText() + "\n");
-            else if(matches.get(0).contains("tab"))
-                output.setText(output.getText() + "\t");
-            else if(matches.get(0).contains("open round bracket"))
-                output.setText(output.getText() + "(");
-            else if(matches.get(0).contains("closed round bracket"))
-                output.setText(output.getText() + ")");
-            else if(matches.get(0).contains("open curly bracket"))
-                output.setText(output.getText() + "{");
-            else if(matches.get(0).contains("closed curly bracket"))
-                output.setText(output.getText() + "}");
-            else if(matches.get(0).contains("make class person"))
-                output.setText(output.getText() + "public class person{\n\n\tpublic person(){\n\t}\n\n}");
-            else
-                output.setText(output.getText() + " " + matches.get(0) + "\n");
-                */
         }
 
         start();
