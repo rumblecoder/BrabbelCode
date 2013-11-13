@@ -169,16 +169,16 @@ public class VoiceRecognizer implements RecognitionListener {
             {
                 String [] speechResultArray = s.split(" ");
                 speechResultArray = Mode.getInstance().extractMode(speechResultArray);
-                String mode = Mode.getInstance().getMode();
+                Enums.MODE mode = Mode.getInstance().getMode();
                 String translatorResult;
 
 
-                if(mode.equals(ModeEnum.CREATE)) {
+                if(mode == Enums.MODE.CREATE) {
                     translatorResult = translator.translateCreate(speechResultArray);
                     matchString = true;
                     output.setText(output.getText() + "\n"+ translatorResult);
                     break;
-                } else if(mode.equals(ModeEnum.SELECT)) {
+                } else if(mode == Enums.MODE.SELECT) {
                     translatorResult = translator.translateSelect(speechResultArray);
                     if(translatorResult.equals("all")) {
                         matchString = true;
@@ -188,14 +188,14 @@ public class VoiceRecognizer implements RecognitionListener {
                         SelectionHandler.getInstance().selectNone();
                     }
                     break;
-                } else if(mode.equals(ModeEnum.DELETE)) {
+                } else if(mode == Enums.MODE.DELETE) {
                     translatorResult = translator.translateDelete(speechResultArray);
                     if(translatorResult.equals("all")) {
                         matchString = true;
                         DeletionHandler.getInstance().deleteAll();
                     }
                     break;
-                } else if(mode.equals(ModeEnum.FREE)) {
+                } else if(mode == Enums.MODE.FREE) {
                     translatorResult = translator.translateFree(speechResultArray);
                     matchString = true;
                     output.setText(output.getText() + "\n" + translatorResult);

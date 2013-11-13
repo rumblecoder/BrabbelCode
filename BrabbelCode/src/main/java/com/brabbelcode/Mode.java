@@ -8,7 +8,7 @@ import java.util.Arrays;
 public class Mode {
     private static final Mode instance = new Mode();
     private TextView textView;
-    private String mode;
+    private Enums.MODE mode;
     private String[] out;
 
     private Mode() {
@@ -22,23 +22,24 @@ public class Mode {
     }
 
     public String[] extractMode(String[] arr) {
-        if(arr[0].equals(ModeEnum.CREATE)) {
-            this.mode = ModeEnum.CREATE;
+        if(arr[0].equals("create")) {
+            this.mode = Enums.MODE.CREATE;
             out = Arrays.copyOfRange(arr, 1, arr.length);
-        } else if(arr[0].equals(ModeEnum.SELECT)) {
-            this.mode = ModeEnum.SELECT;
+        } else if(arr[0].equals("select")) {
+            this.mode = Enums.MODE.SELECT;
             out = Arrays.copyOfRange(arr, 1, arr.length);
-        } else if(arr[0].equals(ModeEnum.DELETE)) {
-            this.mode = ModeEnum.DELETE;
+        } else if(arr[0].equals("delete")) {
+            this.mode = Enums.MODE.DELETE;
             out = Arrays.copyOfRange(arr, 1, arr.length);
         } else {
-            this.mode = ModeEnum.FREE;
+            this.mode = Enums.MODE.FREE;
             out = Arrays.copyOfRange(arr, 0, arr.length);
         }
-        this.textView.setText(this.mode);
+        this.textView.setText("Mode: " + mode.toString());
         return out;
     }
-    public String getMode() {
+
+    public Enums.MODE getMode() {
         return this.mode;
     }
 }
