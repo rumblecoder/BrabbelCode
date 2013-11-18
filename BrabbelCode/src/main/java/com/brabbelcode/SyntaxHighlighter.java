@@ -11,9 +11,6 @@ import java.util.Collection;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/**
- * Created by Tobias on 01.11.13.
- */
 public class SyntaxHighlighter {
 
     static Collection<String> KEYWORDS = Arrays.asList("abstract", "assert", "boolean", "break", "byte", "case", "catch", "char", "class", "const",
@@ -46,7 +43,7 @@ public class SyntaxHighlighter {
         }
     }
 
-    public static void watchTextField(final EditText editText) {
+    public static void watchTextView(final EditText editText) {
         final SyntaxHighlighter highlighter = new SyntaxHighlighter();
 
         editText.addTextChangedListener(new TextWatcher() {

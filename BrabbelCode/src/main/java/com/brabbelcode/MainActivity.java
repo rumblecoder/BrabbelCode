@@ -24,7 +24,8 @@ public class MainActivity extends Activity {
         debugBox = (EditText) findViewById(R.id.debugBox);
         modeLabel = (TextView) findViewById(R.id.modeText);
 
-        SyntaxHighlighter.watchTextField(codeEditor);
+        SyntaxHighlighter.watchTextView(codeEditor);
+        CodeHistory.getInstance().watchTextView(codeEditor, -1);
 
         recognizer = new VoiceRecognizer(this);
 

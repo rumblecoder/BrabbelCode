@@ -14,9 +14,6 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Tobias on 01.11.13.
- */
 public class VoiceRecognizer implements RecognitionListener {
 
     /**

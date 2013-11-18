@@ -7,9 +7,6 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-/**
- * Created by Tobias on 01.11.13.
- */
 public class Theme {
 
     private static boolean isDark = false;
