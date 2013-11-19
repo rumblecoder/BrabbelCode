@@ -154,51 +154,46 @@ public class VoiceRecognizer implements RecognitionListener {
     public void onResults(Bundle data)
     {
         ArrayList<String> matches = data.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
-        InputTranslator translator = new InputTranslator();
-
+        InputTranslator translator = new InputTranslator(false);
 
         if(matches != null)
         {
 
             boolean matchString = false;
+            String translatorResult = "";
 
             for(String s:matches)
             {
                 String [] speechResultArray = s.split(" ");
                 speechResultArray = Mode.getInstance().extractMode(speechResultArray);
                 Enums.MODE mode = Mode.getInstance().getMode();
-                String translatorResult;
-
 
                 if(mode == Enums.MODE.CREATE) {
                     translatorResult = translator.translateCreate(speechResultArray);
-                    matchString = true;
                     output.setText(output.getText() + "\n"+ translatorResult);
                     break;
                 } else if(mode == Enums.MODE.SELECT) {
                     translatorResult = translator.translateSelect(speechResultArray);
                     if(translatorResult.equals("all")) {
-                        matchString = true;
                         SelectionHandler.getInstance().selectAll();
                     } else if(translatorResult.equals("none")) {
-                        matchString = true;
                         SelectionHandler.getInstance().selectNone();
                     }
                     break;
                 } else if(mode == Enums.MODE.DELETE) {
                     translatorResult = translator.translateDelete(speechResultArray);
                     if(translatorResult.equals("all")) {
-                        matchString = true;
                         DeletionHandler.getInstance().deleteAll();
                     }
                     break;
                 } else if(mode == Enums.MODE.FREE) {
                     translatorResult = translator.translateFree(speechResultArray);
-                    matchString = true;
                     output.setText(output.getText() + "\n" + translatorResult);
                     break;
                 }
             }
+            if(translatorResult != "")
+                matchString = true;
             debugBox.setText("match string: " + matchString);
             for(String s:matches){
                 debugBox.setText(debugBox.getText() + "\n" + s);
