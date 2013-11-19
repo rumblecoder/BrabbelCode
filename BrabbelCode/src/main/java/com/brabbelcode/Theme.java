@@ -22,8 +22,11 @@ public class Theme {
         CheckBox checkBox1 = (CheckBox) activity.findViewById(R.id.themeCheck);
         checkBox1.setTextColor(Color.argb(255, 0, 0, 0));
         checkBox1.setHighlightColor(Color.argb(255, 0, 0, 0));
-        TextView textView = (TextView) activity.findViewById(R.id.modeText);
-        textView.setTextColor(Color.argb(255, 0, 0, 0));
+        TextView textView0 = (TextView) activity.findViewById(R.id.modeText);
+        textView0.setTextColor(Color.argb(255, 0, 0, 0));
+        TextView textView1 = (TextView) activity.findViewById(R.id.statusText);
+        textView1.setTextColor(Color.argb(255, 255, 255, 255));
+        textView1.setBackgroundColor(Color.argb(255, 30, 30, 30));
 
         isDark = false;
     }
@@ -39,8 +42,11 @@ public class Theme {
         CheckBox checkBox1 = (CheckBox) activity.findViewById(R.id.themeCheck);
         checkBox1.setTextColor(Color.argb(255, 255, 255, 255));
         checkBox1.setHighlightColor(Color.argb(255, 255, 255, 255));
-        TextView textView = (TextView) activity.findViewById(R.id.modeText);
-        textView.setTextColor(Color.argb(255, 255, 255, 255));
+        TextView textView0 = (TextView) activity.findViewById(R.id.modeText);
+        textView0.setTextColor(Color.argb(255, 255, 255, 255));
+        TextView textView1 = (TextView) activity.findViewById(R.id.statusText);
+        textView1.setTextColor(Color.argb(255, 0, 0, 0));
+        textView1.setBackgroundColor(Color.argb(255, 255, 255, 255));
 
         isDark = true;
     }

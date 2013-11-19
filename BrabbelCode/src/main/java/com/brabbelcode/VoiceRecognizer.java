@@ -4,12 +4,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ResolveInfo;
 import android.os.Bundle;
+import android.os.Handler;
 import android.speech.RecognitionListener;
 import android.speech.RecognizerIntent;
 import android.speech.SpeechRecognizer;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,10 +22,12 @@ public class VoiceRecognizer implements RecognitionListener {
     private Context context;
     private SpeechRecognizer speech;
     private Intent intent;
+    private boolean isSpeaking;
+    private Handler handler;
     private boolean isPresent;
     private EditText output;
     private EditText debugBox;
-    private TextView modeLabel;
+    private TextView status;
 
     /**
      * Ctor
@@ -55,8 +57,23 @@ public class VoiceRecognizer implements RecognitionListener {
             intent.putExtra(RecognizerIntent.EXTRA_CALLING_PACKAGE, context.getPackageName());
             intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, "en-US");
             intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+
+            isSpeaking = false;
+            handler = new Handler();
+            handler.postDelayed(runnable, 2000);
         }
     }
+
+    private Runnable runnable = new Runnable() {
+        @Override
+        public void run() {
+
+            if(!isSpeaking)
+                start();
+
+            handler.postDelayed(this, 2000);
+        }
+    };
 
     /**
      * Methods
@@ -85,18 +102,23 @@ public class VoiceRecognizer implements RecognitionListener {
 
         SelectionHandler.getInstance().init(editText);
         DeletionHandler.getInstance().init(editText);
-
     }
-    public void setDebug(EditText editText) { this.debugBox = editText; }
-    public void setModeBox(TextView editText) {
-        this.modeLabel = editText;
-        Mode.getInstance().init(editText);
+
+    public void setDebug(EditText editText){
+        this.debugBox = editText;
+    }
+
+    public void setStatus(TextView textView){
+        status = textView;
     }
 
     /**
      * Getter
      */
     public boolean getIsPresent(){
+
+
+
         return isPresent;
     }
 
@@ -106,6 +128,8 @@ public class VoiceRecognizer implements RecognitionListener {
     @Override
     public void onBeginningOfSpeech()
     {
+        isSpeaking = true;
+        status.setText("You are speaking...");
     }
 
     @Override
@@ -116,23 +140,25 @@ public class VoiceRecognizer implements RecognitionListener {
     @Override
     public void onEndOfSpeech()
     {
+        isSpeaking = false;
+        status.setText("As you wish, my lord.");
     }
 
     @Override
     public void onError(int e)
     {
         if(e == SpeechRecognizer.ERROR_AUDIO)
-            Toast.makeText(context, "Audio Error", Toast.LENGTH_SHORT).show();
+            status.setText("Audio Error");
         else if(e == SpeechRecognizer.ERROR_CLIENT)
-            Toast.makeText(context, "Client Error", Toast.LENGTH_SHORT).show();
+            status.setText("Client Error");
         else if(e == SpeechRecognizer.ERROR_NETWORK)
-            Toast.makeText(context, "Network Error", Toast.LENGTH_SHORT).show();
+            status.setText("Network Error");
         else if(e == SpeechRecognizer.ERROR_NO_MATCH){
-            Toast.makeText(context, "No Match", Toast.LENGTH_SHORT).show();
+            status.setText("No Match");
             start();
         }
         else if(e == SpeechRecognizer.ERROR_SERVER)
-            Toast.makeText(context, "Server Error", Toast.LENGTH_SHORT).show();
+            status.setText("Server Error");
     }
 
     @Override
@@ -148,6 +174,8 @@ public class VoiceRecognizer implements RecognitionListener {
     @Override
     public void onReadyForSpeech(Bundle arg0)
     {
+        isSpeaking = false;
+        status.setText("I´m listening...");
     }
 
     @Override

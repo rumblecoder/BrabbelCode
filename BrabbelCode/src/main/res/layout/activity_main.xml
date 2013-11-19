@@ -47,6 +47,12 @@
             android:layout_width="match_parent"
             android:typeface="monospace"
             android:gravity="top" />
+        <TextView
+            android:id="@+id/statusText"
+            android:layout_height="25dp"
+            android:layout_width="match_parent"
+            android:textSize="16sp"
+            android:gravity="center"/>
         <EditText
             android:id="@+id/debugBox"
             android:inputType="textMultiLine|textNoSuggestions"

@@ -12,31 +12,29 @@ public class MainActivity extends Activity {
 
     private VoiceRecognizer recognizer;
     private EditText codeEditor;
-    private EditText debugBox;
-    private TextView modeLabel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        recognizer = new VoiceRecognizer(this);
         codeEditor = (EditText) findViewById(R.id.codeEditor);
-        debugBox = (EditText) findViewById(R.id.debugBox);
-        modeLabel = (TextView) findViewById(R.id.modeText);
 
         SyntaxHighlighter.watchTextView(codeEditor);
         CodeHistory.getInstance().watchTextView(codeEditor, -1);
-
-        recognizer = new VoiceRecognizer(this);
+        Mode.getInstance().init((TextView) findViewById(R.id.modeText));
 
         if(!recognizer.getIsPresent())
             Toast.makeText(this, "Voice recognizer not present", Toast.LENGTH_SHORT).show();
         else{
             recognizer.setOutput(codeEditor);
-            recognizer.setDebug(debugBox);
-            recognizer.setModeBox(modeLabel);
+            recognizer.setDebug((EditText) findViewById(R.id.debugBox));
+            recognizer.setStatus((TextView) findViewById(R.id.statusText));
             recognizer.start();
         }
+
+        Theme.setLight(this);
     }
 
     /**
