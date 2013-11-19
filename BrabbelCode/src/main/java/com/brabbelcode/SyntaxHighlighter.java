@@ -19,7 +19,7 @@ public class SyntaxHighlighter {
             "instanceof", "int", "interface", "long", "native", "new", "null",
             "package", "private", "protected", "public", "return",
             "short", "static", "strictfp", "super", "switch", "synchronized", "this", "throw", "throws", "true",
-            "transient", "try", "void", "volatile", "while");
+            "transient", "try", "void", "volatile", "while","string");
 
     static Pattern WORD_PATTERN = Pattern.compile("\\w+");
 

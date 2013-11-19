@@ -14,9 +14,9 @@ public class Macros {
         createHashtable = new Hashtable<String,String>();
         createHashtable.put("class", "public class XPlaceholderX{\n\n\tpublic XPlaceholderX(){\n\t}\n\n}");
         createHashtable.put("function", "function XPlaceholderX(){\n\n}");
-        createHashtable.put("integer variable", "int XPlaceholderX;");
-        createHashtable.put("string variable", "string XPlaceholderX;");
-        createHashtable.put("double variable", "double XPlaceholderX;");
+        createHashtable.put("integer", "int XPlaceholderX;");
+        createHashtable.put("string", "string XPlaceholderX;");
+        createHashtable.put("double", "double XPlaceholderX;");
         createHashtable.put("next line", "line break");
         createHashtable.put("new line","line break");
         createHashtable.put("exit mode", "leave current mode");
