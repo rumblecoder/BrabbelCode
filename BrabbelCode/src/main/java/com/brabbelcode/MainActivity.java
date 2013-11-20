@@ -11,7 +11,7 @@ import android.widget.Toast;
 public class MainActivity extends Activity {
 
     private VoiceRecognizer recognizer;
-    private EditText codeEditor;
+    private LineNumbers codeEditor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,7 +19,7 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
 
         recognizer = new VoiceRecognizer(this);
-        codeEditor = (EditText) findViewById(R.id.codeEditor);
+        codeEditor = (LineNumbers) findViewById(R.id.codeEditor);
 
         SyntaxHighlighter.watchTextView(codeEditor);
         CodeHistory.getInstance().watchTextView(codeEditor, -1);

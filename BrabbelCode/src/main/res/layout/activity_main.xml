@@ -40,19 +40,23 @@
         android:layout_height="fill_parent"
         android:layout_width="match_parent"
         android:orientation="vertical">
-        <EditText
+        <com.brabbelcode.LineNumbers
             android:id="@+id/codeEditor"
-            android:inputType="textMultiLine|textNoSuggestions"
-            android:layout_height="250dp"
             android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:inputType="textMultiLine"
+            android:layout_gravity="top"
             android:typeface="monospace"
-            android:gravity="top" />
+            android:textCursorDrawable="@null">
+            <requestFocus/>
+        </com.brabbelcode.LineNumbers>
         <TextView
             android:id="@+id/statusText"
             android:layout_height="25dp"
             android:layout_width="match_parent"
             android:textSize="16sp"
             android:gravity="center"/>
+
         <EditText
             android:id="@+id/debugBox"
             android:inputType="textMultiLine|textNoSuggestions"
