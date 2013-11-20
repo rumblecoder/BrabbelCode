@@ -219,6 +219,13 @@ public class VoiceRecognizer implements RecognitionListener {
                     output.setText(output.getText() + "\n" + translatorResult);
                     break;
                 }
+                  else if(mode == Enums.MODE.UNDO) {
+                    CodeHistory.getInstance().undo();
+                    break;
+                } else if(mode == Enums.MODE.REDO) {
+                    CodeHistory.getInstance().redo();
+                    break;
+                }
             }
             if(translatorResult != "")
                 matchString = true;

@@ -2,5 +2,5 @@ package com.brabbelcode;
 
 public class Enums {
 
-    public enum MODE {CREATE, SELECT, DELETE, FREE};
+    public enum MODE {CREATE, SELECT, DELETE, FREE, UNDO, REDO};
 }

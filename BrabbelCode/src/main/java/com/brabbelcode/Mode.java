@@ -31,11 +31,20 @@ public class Mode {
         } else if(arr[0].equals("delete")) {
             this.mode = Enums.MODE.DELETE;
             out = Arrays.copyOfRange(arr, 1, arr.length);
-        } else {
+        } else if(arr[0].equals("undo")) {
+            this.mode = Enums.MODE.UNDO;
+            //out = Arrays.copyOfRange(arr, 1, arr.length);
+            out = null;
+        } else if(arr[0].equals("redo")) {
+            this.mode = Enums.MODE.REDO;
+            //out = Arrays.copyOfRange(arr, 1, arr.length);
+            out = null;
+        }
+        else {
             this.mode = Enums.MODE.FREE;
             out = Arrays.copyOfRange(arr, 0, arr.length);
         }
-        this.textView.setText("Mode: " + mode.toString());
+        this.textView.setText(mode.toString());
         return out;
     }
 
