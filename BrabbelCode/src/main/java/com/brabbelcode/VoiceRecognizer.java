@@ -240,6 +240,8 @@ public class VoiceRecognizer implements RecognitionListener {
             for(String s:matches){
                 debugBox.setText(debugBox.getText() + "\n" + s);
             }
+
+            //TODO: Bug -> wrong position in code, block is also executed on other commands
             if (translatorResult.contains("XPlaceholderX")) {
                 if (this.replacer == null) {
                     this.replacer = PlaceholderReplacer.getInstance();
@@ -247,6 +249,7 @@ public class VoiceRecognizer implements RecognitionListener {
                 this.replacer.setCommandToModify(translatorResult);
                 this.replacer.setReadyState(true);
             }
+
         } else if (matches != null && this.replacer.getReadystate()) {
             String s = matches.get(0);
             String [] speechResultArray = s.split(" ");

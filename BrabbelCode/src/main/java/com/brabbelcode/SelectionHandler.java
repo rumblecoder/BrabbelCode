@@ -19,11 +19,11 @@ public class SelectionHandler {
         return instance;
     }
 
-    public int setStartIndex(int start) {
+    public void setStartIndex(int start) {
         this.start = start;
         this.calculateLength();
     }
-    public int setEndIndex(int end) {
+    public void setEndIndex(int end) {
         this.end = end;
         this.calculateLength();
     }
@@ -43,11 +43,26 @@ public class SelectionHandler {
         this.textBox.setSelection(this.textBox.getText().length());
     }
     public void selectLine(String[] line) {
-        int lineNumber = Integer.parseInt(line[0]);
+        if(Util.isInteger(line[1])) {
+            int lineNumber = Integer.parseInt(line[1]);
 
-        String text = this.textBox.toString();
-        //TODO: find nth \n und nth-1 \n in String, save index to start/end
-        this.textBox.setSelection(SelectionHandler.getInstance().getStartIndex(), SelectionHandler.getInstance().getEndIndex());
+            String[] lines = this.textBox.getText().toString().split("\r?\n");
+
+            if(lines.length > lineNumber) {
+                int end = 0;
+                int start = 0;
+                for(int i = 0; i < lineNumber; i++) {
+                    start = end;
+                    end += lines[i].length() + 1; // +1 for \n
+                }
+                if(start < end) {
+                    this.setStartIndex(start);
+                    this.setEndIndex(end);
+                    this.textBox.setSelection(start, end);
+                }
+            }
+        }
+        //TODO: unable to select last line!
     }
 
     private void calculateLength() {
