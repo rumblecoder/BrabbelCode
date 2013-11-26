@@ -5,7 +5,7 @@ import java.util.*;
  * Created by andypf on 12.11.13.
  */
 public class Macros {
-    private Hashtable<String,String>  createHashtable;
+    private Hashtable<String,String> createHashtable;
     private Hashtable<String,String> selectionHashtable;
     private Hashtable<String, String> deleteHashtable;
 
@@ -26,10 +26,12 @@ public class Macros {
         selectionHashtable = new Hashtable<String,String>();
         selectionHashtable.put("all","all");
         selectionHashtable.put("none","none");
+        selectionHashtable.put("line","line");
 
 
         deleteHashtable = new Hashtable<String, String>();
         deleteHashtable.put("all","all");
+        deleteHashtable.put("selection","selection");
     }
 
     public Hashtable<String,String> getWholeCommandList()

@@ -20,6 +20,9 @@ public class DeletionHandler {
         this.textBox.setText("");
     }
     public void deleteSelection() {
-        //TODO
+        //TODO: test code
+        int start = SelectionHandler.getInstance().getStartIndex();
+        int length = SelectionHandler.getInstance().getSelectionLength();
+        this.textBox.setText(new char[] {' '}, start, length);
     }
 }
