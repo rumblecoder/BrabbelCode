@@ -6,7 +6,7 @@ package com.brabbelcode;
 public class LevenshteinDistance {
 
 
-
+    private static double tolerance = 0.2;
 
     private static int minimum(int a, int b, int c)
     {
@@ -29,5 +29,13 @@ public class LevenshteinDistance {
                                 + ((str1.charAt(i - 1) == str2.charAt(j - 1)) ? 0: 1));
 
         return distance[str1.length()][str2.length()];
+    }
+
+    public static boolean computeLevenshteinDistanceWithTolerance(CharSequence str1, CharSequence str2){
+        int levDist = computeLevenshteinDistance(str1,str2);
+        if(levDist <= str1.length()*tolerance)
+            return true;
+        else
+            return false;
     }
 }

@@ -21,7 +21,7 @@ public class Mode {
         return instance;
     }
 
-    public String[] extractMode(String[] arr) {
+    /*public String[] extractMode(String[] arr) {
         if(arr[0].equals("create")) {
             this.mode = Enums.MODE.CREATE;
             out = Arrays.copyOfRange(arr, 1, arr.length);
@@ -33,11 +33,34 @@ public class Mode {
             out = Arrays.copyOfRange(arr, 1, arr.length);
         } else if(arr[0].equals("undo")) {
             this.mode = Enums.MODE.UNDO;
-            //out = Arrays.copyOfRange(arr, 1, arr.length);
             out = null;
         } else if(arr[0].equals("redo")) {
             this.mode = Enums.MODE.REDO;
-            //out = Arrays.copyOfRange(arr, 1, arr.length);
+            out = null;
+        }
+        else {
+            this.mode = Enums.MODE.FREE;
+            out = Arrays.copyOfRange(arr, 0, arr.length);
+        }
+        this.textView.setText(mode.toString());
+        return out;
+    }*/
+
+    public String[] extractMode(String[] arr) {
+        if(LevenshteinDistance.computeLevenshteinDistanceWithTolerance(arr[0],"create")){
+            this.mode = Enums.MODE.CREATE;
+            out = Arrays.copyOfRange(arr, 1, arr.length);
+        } else if(LevenshteinDistance.computeLevenshteinDistanceWithTolerance(arr[0],"select")) {
+            this.mode = Enums.MODE.SELECT;
+            out = Arrays.copyOfRange(arr, 1, arr.length);
+        } else if(LevenshteinDistance.computeLevenshteinDistanceWithTolerance(arr[0],"delete")) {
+            this.mode = Enums.MODE.DELETE;
+            out = Arrays.copyOfRange(arr, 1, arr.length);
+        } else if(LevenshteinDistance.computeLevenshteinDistanceWithTolerance(arr[0],"undo")) {
+            this.mode = Enums.MODE.UNDO;
+            out = null;
+        } else if(LevenshteinDistance.computeLevenshteinDistanceWithTolerance(arr[0],"redo")) {
+            this.mode = Enums.MODE.REDO;
             out = null;
         }
         else {
@@ -47,6 +70,7 @@ public class Mode {
         this.textView.setText(mode.toString());
         return out;
     }
+
 
     public Enums.MODE getMode() {
         return this.mode;
