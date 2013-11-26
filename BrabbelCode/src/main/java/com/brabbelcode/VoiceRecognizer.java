@@ -28,6 +28,7 @@ public class VoiceRecognizer implements RecognitionListener {
     private EditText output;
     private EditText debugBox;
     private TextView status;
+    private PlaceholderReplacer replacer;
 
     /**
      * Ctor
@@ -61,6 +62,7 @@ public class VoiceRecognizer implements RecognitionListener {
             isSpeaking = false;
             handler = new Handler();
             handler.postDelayed(runnable, 2000);
+            this.replacer = PlaceholderReplacer.getInstance();
         }
     }
 
@@ -184,11 +186,11 @@ public class VoiceRecognizer implements RecognitionListener {
         ArrayList<String> matches = data.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
         InputTranslator translator = new InputTranslator(false);
 
-        if(matches != null)
+        String translatorResult = "";
+        if(matches != null && !this.replacer.getReadystate())
         {
 
             boolean matchString = false;
-            String translatorResult = "";
 
             for(String s:matches)
             {
@@ -227,13 +229,27 @@ public class VoiceRecognizer implements RecognitionListener {
                     break;
                 }
             }
+
             if(translatorResult != "")
                 matchString = true;
             debugBox.setText("match string: " + matchString);
             for(String s:matches){
                 debugBox.setText(debugBox.getText() + "\n" + s);
             }
-
+            if (translatorResult.contains("XPlaceholderX")) {
+                if (this.replacer == null) {
+                    this.replacer = PlaceholderReplacer.getInstance();
+                }
+                this.replacer.setCommandToModify(translatorResult);
+                this.replacer.setReadyState(true);
+            }
+        } else if (matches != null && this.replacer.getReadystate()) {
+            String s = matches.get(0);
+            String [] speechResultArray = s.split(" ");
+            translatorResult = translator.translateFree(speechResultArray);
+            translatorResult = this.replacer.replacePlaceholders(translatorResult);
+            this.replacer.setReadyState(false);
+            CodeHistory.getInstance().replace(translatorResult);
         }
 
         start();
