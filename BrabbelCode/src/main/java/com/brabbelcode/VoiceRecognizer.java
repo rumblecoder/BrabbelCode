@@ -246,8 +246,7 @@ public class VoiceRecognizer implements RecognitionListener {
         } else if (matches != null && this.replacer.getReadystate()) {
             String s = matches.get(0);
             String [] speechResultArray = s.split(" ");
-            translatorResult = translator.translateFree(speechResultArray);
-            translatorResult = this.replacer.replacePlaceholders(translatorResult);
+            translatorResult = this.replacer.replacePlaceholders(speechResultArray);
             this.replacer.setReadyState(false);
             CodeHistory.getInstance().replace(translatorResult);
         }
