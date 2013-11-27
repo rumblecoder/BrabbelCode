@@ -32,7 +32,7 @@ public class PlaceholderReplacer {
      * @return Result without placeholders
      */
     public String replacePlaceholders(String translateResults) {
-        this.commandToModify.replace("XPlaceholderX", translateResults);
+        this.commandToModify = this.commandToModify.replace("XPlaceholderX", translateResults);
         return this.commandToModify;
     }
 
