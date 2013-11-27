@@ -208,12 +208,16 @@ public class VoiceRecognizer implements RecognitionListener {
                         SelectionHandler.getInstance().selectAll();
                     } else if(translatorResult.equals("none")) {
                         SelectionHandler.getInstance().selectNone();
+                    } else if(translatorResult.equals("line")) {
+                        SelectionHandler.getInstance().selectLine(speechResultArray);
                     }
                     break;
                 } else if(mode == Enums.MODE.DELETE) {
                     translatorResult = translator.translateDelete(speechResultArray);
                     if(translatorResult.equals("all")) {
                         DeletionHandler.getInstance().deleteAll();
+                    } else if(translatorResult.equals("selection")) {
+                        DeletionHandler.getInstance().deleteSelection();
                     }
                     break;
                 } else if(mode == Enums.MODE.FREE) {
@@ -236,6 +240,8 @@ public class VoiceRecognizer implements RecognitionListener {
             for(String s:matches){
                 debugBox.setText(debugBox.getText() + "\n" + s);
             }
+
+            //TODO: Bug -> wrong position in code, block is also executed on other commands
             if (translatorResult.contains("XPlaceholderX")) {
                 if (this.replacer == null) {
                     this.replacer = PlaceholderReplacer.getInstance();
@@ -243,11 +249,11 @@ public class VoiceRecognizer implements RecognitionListener {
                 this.replacer.setCommandToModify(translatorResult);
                 this.replacer.setReadyState(true);
             }
+
         } else if (matches != null && this.replacer.getReadystate()) {
             String s = matches.get(0);
             String [] speechResultArray = s.split(" ");
-            translatorResult = translator.translateFree(speechResultArray);
-            translatorResult = this.replacer.replacePlaceholders(translatorResult);
+            translatorResult = this.replacer.replacePlaceholders(speechResultArray);
             this.replacer.setReadyState(false);
             CodeHistory.getInstance().replace(translatorResult);
         }
