@@ -27,6 +27,8 @@ public class LineNumbers extends EditText {
 
         nDrawingRect = new Rect();
         nLineBounds = new Rect();
+
+        sets();
     }
 
     public void onDraw (Canvas canvas) {
@@ -78,6 +80,11 @@ public class LineNumbers extends EditText {
 
     }
 
+    public void sets(){
+        setHorizontallyScrolling(true);
+        setTextSize(TEXT_SIZE);
+    }
+
     protected Paint nPaintNumbers;
 
     protected int nPaddingDP = 6;
@@ -88,7 +95,7 @@ public class LineNumbers extends EditText {
 
     protected Rect nDrawingRect, nLineBounds;
 
-    public static int TEXT_SIZE=12;
+    public static int TEXT_SIZE=14;
 
     protected Point nMaxSize;
 
