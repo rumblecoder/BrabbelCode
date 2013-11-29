@@ -19,7 +19,6 @@ public class LineNumbers extends EditText {
 
         nPaintNumbers = new Paint();
         nPaintNumbers.setTypeface(Typeface.MONOSPACE);
-        nPaintNumbers.setTextSize(12);
         nPaintNumbers.setAntiAlias(true);
 
         nScale = context.getResources().getDisplayMetrics().density;
@@ -83,6 +82,7 @@ public class LineNumbers extends EditText {
     public void sets(){
         setHorizontallyScrolling(true);
         setTextSize(TEXT_SIZE);
+        nPaintNumbers.setTextSize(this.getTextSize());
     }
 
     protected Paint nPaintNumbers;
