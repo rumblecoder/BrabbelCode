@@ -12,8 +12,8 @@ public class Macros {
     public Macros()
     {
         createHashtable = new Hashtable<String,String>();
-        createHashtable.put("class", "public class XPlaceholderX{\n\n\tpublic XPlaceholderX(){\n\t}\n\n}");
-        createHashtable.put("function", "function XPlaceholderX(){\n\n}");
+        createHashtable.put("class", "public class XPlaceholderX { \n \n \t public XPlaceholderX () { \n \t } \n \n }");
+        createHashtable.put("function", "function XPlaceholderX () { \n \n }");
         createHashtable.put("integer", "int XPlaceholderX;");
         createHashtable.put("string", "string XPlaceholderX;");
         createHashtable.put("double", "double XPlaceholderX;");
@@ -27,6 +27,8 @@ public class Macros {
         selectionHashtable.put("all","all");
         selectionHashtable.put("none","none");
         selectionHashtable.put("line","line");
+        selectionHashtable.put("word","word");
+        selectionHashtable.put("next","next");
 
 
         deleteHashtable = new Hashtable<String, String>();

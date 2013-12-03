@@ -206,10 +206,14 @@ public class VoiceRecognizer implements RecognitionListener {
                     translatorResult = translator.translateSelect(speechResultArray);
                     if(translatorResult.equals("all")) {
                         SelectionHandler.getInstance().selectAll();
-                    } else if(translatorResult.equals("none")) {
-                        SelectionHandler.getInstance().selectNone();
+                    } else if(translatorResult.equals("word")) {
+                        SelectionHandler.getInstance().selectNextWord(speechResultArray);
+                    } else if(translatorResult.equals("next")) {
+                        SelectionHandler.getInstance().selectNext();
                     } else if(translatorResult.equals("line")) {
                         SelectionHandler.getInstance().selectLine(speechResultArray);
+                    } else if(translatorResult.equals("none")) {
+                        SelectionHandler.getInstance().selectNone();
                     }
                     break;
                 } else if(mode == Enums.MODE.DELETE) {
