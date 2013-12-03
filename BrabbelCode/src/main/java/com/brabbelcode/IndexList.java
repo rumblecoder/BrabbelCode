@@ -1,8 +1,5 @@
 package com.brabbelcode;
 
-/**
- * Created by bytemares on 11/12/13.
- */
 public class IndexList {
     private int start = 0;
     private int end = 0;
