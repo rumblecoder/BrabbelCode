@@ -42,11 +42,11 @@
         android:orientation="vertical">
         <com.brabbelcode.LineNumbers
             android:id="@+id/codeEditor"
-            android:layout_width="match_parent"
+            android:inputType="textMultiLine|textNoSuggestions"
             android:layout_height="250dp"
-            android:inputType="textMultiLine"
-            android:layout_gravity="top"
+            android:layout_width="match_parent"
             android:typeface="monospace"
+            android:gravity="top"
             android:textCursorDrawable="@null">
             <requestFocus/>
         </com.brabbelcode.LineNumbers>

@@ -14,8 +14,9 @@ public class Theme {
     public static void setLight(Activity activity){
         LinearLayout linearLayout = (LinearLayout) activity.findViewById(R.id.container);
         linearLayout.setBackgroundColor(Color.argb(255, 255, 255, 255));
-        EditText editText = (EditText) activity.findViewById(R.id.codeEditor);
-        editText.setTextColor(Color.argb(255, 0, 0, 0));
+        LineNumbers lineNumbers = (LineNumbers) activity.findViewById(R.id.codeEditor);
+        lineNumbers.setTextColor(Color.argb(255, 0, 0, 0));
+        lineNumbers.nPaintNumbers.setColor(Color.argb(255, 0, 0, 0));
         CheckBox checkBox0 = (CheckBox) activity.findViewById(R.id.micCheck);
         checkBox0.setTextColor(Color.argb(255, 0, 0, 0));
         checkBox0.setHighlightColor(Color.argb(255, 0, 0, 0));
@@ -34,8 +35,9 @@ public class Theme {
     public static void setDark(Activity activity){
         LinearLayout linearLayout = (LinearLayout) activity.findViewById(R.id.container);
         linearLayout.setBackgroundColor(Color.argb(255, 30, 30, 30));
-        EditText editText = (EditText) activity.findViewById(R.id.codeEditor);
-        editText.setTextColor(Color.argb(255, 255, 255, 255));
+        LineNumbers lineNumbers = (LineNumbers) activity.findViewById(R.id.codeEditor);
+        lineNumbers.setTextColor(Color.argb(255, 255, 255, 255));
+        lineNumbers.nPaintNumbers.setColor(Color.argb(255, 255, 255, 255));
         CheckBox checkBox0 = (CheckBox) activity.findViewById(R.id.micCheck);
         checkBox0.setTextColor(Color.argb(255, 255, 255, 255));
         checkBox0.setHighlightColor(Color.argb(255, 255, 255, 255));
