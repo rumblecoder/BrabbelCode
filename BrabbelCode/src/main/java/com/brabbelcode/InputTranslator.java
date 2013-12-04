@@ -10,13 +10,13 @@ public class InputTranslator {
 
     private double tolerance;
     private Macros macros;
-    private boolean adrienMode;
+    private boolean easyMode;
 
     public InputTranslator(boolean useTolerance)
     {
         this.tolerance = 0.6;
         this.macros = new Macros();
-        this.adrienMode = useTolerance;
+        this.easyMode = useTolerance;
     }
 
     public String translateCreate(String[] speechResultArray)
@@ -62,7 +62,7 @@ public class InputTranslator {
         }
         if(priorKey != null)
         {
-            if(!adrienMode)
+            if(!easyMode)
                 result = commandHashtable.get(priorKey);
             else
             {
