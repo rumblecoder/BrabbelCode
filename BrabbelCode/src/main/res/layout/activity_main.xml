@@ -11,6 +11,7 @@
         android:layout_height="50dp"
         android:layout_width="match_parent"
         android:orientation="horizontal">
+
         <CheckBox
             android:id="@+id/micCheck"
             android:text="Mic off"
@@ -36,34 +37,45 @@
             android:text="Mode:" />
     </LinearLayout>
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_height="fill_parent"
         android:layout_width="match_parent"
         android:orientation="vertical">
         <com.brabbelcode.LineNumbers
             android:id="@+id/codeEditor"
             android:inputType="textMultiLine|textNoSuggestions"
-            android:layout_height="250dp"
+            android:layout_height="match_parent"
             android:layout_width="match_parent"
             android:typeface="monospace"
             android:gravity="top"
             android:textCursorDrawable="@null">
             <requestFocus/>
         </com.brabbelcode.LineNumbers>
-        <TextView
+        <!--<TextView
             android:id="@+id/statusText"
-            android:layout_height="25dp"
+            android:layout_height="wrap_content"
             android:layout_width="match_parent"
             android:textSize="16sp"
-            android:gravity="center"/>
+            android:gravity="center"/>-->
 
         <EditText
             android:id="@+id/debugBox"
             android:inputType="textMultiLine|textNoSuggestions"
-            android:layout_height="250dp"
+            android:layout_height="0dp"
             android:layout_width="match_parent"
             android:typeface="monospace"
-            android:gravity="top" />
-    </LinearLayout>
+            android:gravity="top"
+            android:visibility="invisible"/>
+
+        <TextView
+            android:id="@+id/statusText"
+            android:layout_alignParentBottom="true"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:textSize="16sp"
+            android:gravity="center"/>
+
+    </RelativeLayout>
+
 
 </LinearLayout>
