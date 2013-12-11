@@ -205,7 +205,7 @@ public class PlaceholderReplacer {
         }
         if (this.commandToModify.endsWith(" ;")) {
             SelectionHandler.getInstance().setEndIndex(SelectionHandler.getInstance().getEndIndex() + 1);
-            convertedResult += ";";
+            convertedResult += "; \n";
         }
         this.replaceSelection(convertedResult);
     }
