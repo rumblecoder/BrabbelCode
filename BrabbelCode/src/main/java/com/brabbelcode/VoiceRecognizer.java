@@ -104,6 +104,7 @@ public class VoiceRecognizer implements RecognitionListener {
 
         SelectionHandler.getInstance().init(editText);
         DeletionHandler.getInstance().init(editText);
+        PlaceholderReplacer.getInstance().init(editText);
     }
 
     public void setDebug(EditText editText){
@@ -200,7 +201,11 @@ public class VoiceRecognizer implements RecognitionListener {
 
                 if(mode == Enums.MODE.CREATE) {
                     translatorResult = translator.translateCreate(speechResultArray);
-                    output.setText(output.getText() + "\n"+ translatorResult);
+                    // output.setText(output.getText() + "\n"+ translatorResult);
+                    output.getText().insert(output.getSelectionStart(), translatorResult + "\n");
+                    this.replacer.setCommandToModify(translatorResult);
+                    this.replacer.setReadyState(true);
+                    this.setSelection();
                     break;
                 } else if(mode == Enums.MODE.SELECT) {
                     translatorResult = translator.translateSelect(speechResultArray);
@@ -226,7 +231,8 @@ public class VoiceRecognizer implements RecognitionListener {
                     break;
                 } else if(mode == Enums.MODE.FREE) {
                     translatorResult = translator.translateFree(speechResultArray);
-                    output.setText(output.getText() + "\n" + translatorResult);
+                    // output.setText(output.getText() + "\n" + translatorResult);
+                    output.getText().insert(output.getSelectionStart(), translatorResult + "\n");
                     break;
                 }
                   else if(mode == Enums.MODE.UNDO) {
@@ -245,21 +251,11 @@ public class VoiceRecognizer implements RecognitionListener {
                 debugBox.setText(debugBox.getText() + "\n" + s);
             }
 
-            //TODO: Bug -> wrong position in code, block is also executed on other commands
-            if (translatorResult.contains("XPlaceholderX")) {
-                if (this.replacer == null) {
-                    this.replacer = PlaceholderReplacer.getInstance();
-                }
-                this.replacer.setCommandToModify(translatorResult);
-                this.replacer.setReadyState(true);
-            }
-
         } else if (matches != null && this.replacer.getReadystate()) {
             String s = matches.get(0);
-            String [] speechResultArray = s.split(" ");
-            translatorResult = this.replacer.replacePlaceholders(speechResultArray);
-            this.replacer.setReadyState(false);
-            CodeHistory.getInstance().replace(translatorResult);
+            String[] speechResultArray = s.split(" ");
+            this.replacer.replace(speechResultArray);
+            this.setSelection();
         }
 
         start();
@@ -270,4 +266,29 @@ public class VoiceRecognizer implements RecognitionListener {
     public void onRmsChanged(float arg0)
     {
     }
+
+    /**
+     * Checks if there are placeholders or accessors to select and selects the next one.
+     */
+    private void setSelection() {
+        if (SelectionHandler.getInstance().selectWord("XAccessorX")) {
+            this.replacer.setAccessorIsSelected(true);
+            this.replacer.setReturnValueIsSelected(false);
+        } else if (SelectionHandler.getInstance().selectWord("XReturnValueX")) {
+            this.replacer.setAccessorIsSelected(false);
+            this.replacer.setReturnValueIsSelected(true);
+        } else if (SelectionHandler.getInstance().selectWord("XPlaceholderX")) {
+            this.replacer.setAccessorIsSelected(false);
+            this.replacer.setReturnValueIsSelected(false);
+        } else if (SelectionHandler.getInstance().selectWord("XLastPlaceholderX")) {
+            int start = SelectionHandler.getInstance().getStartIndex();
+            this.replacer.replaceSelection("");
+            output.setSelection(start);
+            this.replacer.setReadyState(false);
+        } else {
+            this.replacer.setReadyState(false);
+            output.setSelection(output.getSelectionEnd());
+        }
+    }
 }
+

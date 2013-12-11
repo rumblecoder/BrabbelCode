@@ -1,5 +1,6 @@
 package com.brabbelcode;
-import java.util.*;
+
+import java.util.Hashtable;
 
 /**
  * Created by andypf on 12.11.13.
@@ -12,16 +13,15 @@ public class Macros {
     public Macros()
     {
         createHashtable = new Hashtable<String,String>();
-        createHashtable.put("class", "public class XPlaceholderX { \n \n \t public XPlaceholderX () { \n \t } \n \n }");
-        createHashtable.put("function", "function XPlaceholderX () { \n \n }");
-        createHashtable.put("integer", "int XPlaceholderX;");
-        createHashtable.put("string", "string XPlaceholderX;");
-        createHashtable.put("double", "double XPlaceholderX;");
+        createHashtable.put("class", "XAccessorX class XPlaceholderX { \n \n \t XAccessorX XPlaceholderX () { \n XLastPlaceholderX \t } \n \n }");
+        createHashtable.put("function", "XAccessorX XReturnValueX XPlaceholderX () { \n XLastPlaceholderX \n return null; \n }");
+        createHashtable.put("integer", "XAccessorX int XPlaceholderX ;");
+        createHashtable.put("string", "XAccessorX string XPlaceholderX ;");
+        createHashtable.put("double", "XAccessorX double XPlaceholderX ;");
         createHashtable.put("next line", "line break");
         createHashtable.put("new line","line break");
         createHashtable.put("exit mode", "leave current mode");
         createHashtable.put("leave mode", "leave current mode");
-
 
         selectionHashtable = new Hashtable<String,String>();
         selectionHashtable.put("all","all");

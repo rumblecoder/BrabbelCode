@@ -17,7 +17,7 @@ public class CodeHistory {
     private EditTextChangeListener changeListener;
     private TextView textView;
 
-    private CodeHistory(){
+    private CodeHistory() {
 
     }
 
@@ -25,7 +25,7 @@ public class CodeHistory {
         return instance;
     }
 
-    public void watchTextView(TextView codeEditor, int maxHistorySize){
+    public void watchTextView(TextView codeEditor, int maxHistorySize) {
         textView = codeEditor;
         editHistory = new EditHistory();
         editHistory.setMaxHistorySize(maxHistorySize);
@@ -61,34 +61,6 @@ public class CodeHistory {
 
         isUndoOrRedo = true;
         text.replace(start, end, edit.before);
-        isUndoOrRedo = false;
-
-        // This will get rid of underlines inserted when editor tries to come
-        // up with a suggestion.
-        for (Object o : text.getSpans(0, text.length(), UnderlineSpan.class)) {
-            text.removeSpan(o);
-        }
-
-        Selection.setSelection(text, edit.before == null ? start
-                : (start + edit.before.length()));
-    }
-
-    /**
-     * Replaces the placeholders in the last given command (Author: Chris)
-     * @param replacement
-     */
-    public void replace(String replacement) {
-        EditItem edit = editHistory.getPrevious();
-        if (edit == null) {
-            return;
-        }
-
-        Editable text = textView.getEditableText();
-        int start = edit.start;
-        int end = start + (edit.after != null ? edit.after.length() : 0);
-
-        isUndoOrRedo = true;
-        text.replace(start, end, replacement);
         isUndoOrRedo = false;
 
         // This will get rid of underlines inserted when editor tries to come

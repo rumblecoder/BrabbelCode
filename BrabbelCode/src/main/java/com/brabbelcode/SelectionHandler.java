@@ -83,11 +83,26 @@ public class SelectionHandler {
         }
         return false;
     }
+
+    /**
+     * Searches and if found selects a  given word in the text
+     *
+     * @param word
+     * @return
+     */
+    public boolean selectWord(String word) {
+        this.word = word;
+        this.createIndex(this.word);
+        return this.selectNext();
+    }
+
     public boolean selectNext() {
         if(this.currentIndex < this.indexList.size()) {
             this.currentWord.setStart(this.indexList.get(this.currentIndex).getStart());
             this.currentWord.setEnd(this.indexList.get(this.currentIndex).getEnd());
             this.textBox.setSelection(this.currentWord.getStart(), this.currentWord.getEnd());
+            this.start = this.currentWord.getStart();
+            this.end = this.currentWord.getEnd();
             this.currentIndex = (this.currentIndex + 1) % this.indexList.size();
             return true;
         } else {
