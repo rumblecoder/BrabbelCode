@@ -83,6 +83,7 @@ public class LineNumbers extends EditText {
     public void sets(){
         setHorizontallyScrolling(true);
         setTextSize(TEXT_SIZE);
+        nPaintNumbers.setTextSize(this.getTextSize());
     }
 
     protected Paint nPaintNumbers;

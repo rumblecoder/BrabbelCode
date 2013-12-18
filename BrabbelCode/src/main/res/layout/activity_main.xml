@@ -8,35 +8,40 @@
     tools:ignore="MergeRootFrame">
 
     <LinearLayout
-        android:layout_height="50dp"
         android:layout_width="match_parent"
-        android:orientation="horizontal">
-
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingLeft="20dp">
         <CheckBox
             android:id="@+id/micCheck"
-            android:text="Mic off"
-            android:layout_height="50dp"
-            android:layout_width="90dp"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
             android:onClick="onMicCheckClicked"
-            android:checked="false"
-            android:enabled="true" />
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"
+            android:button="@drawable/mic" />
         <CheckBox
             android:id="@+id/themeCheck"
-            android:text="Dark Theme"
-            android:layout_height="50dp"
-            android:layout_width="125dp"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
             android:onClick="onThemeCheckClicked"
-            android:checked="false"
-            android:enabled="true" />
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"
+            android:button="@drawable/theme"/>
         <TextView
             android:id="@+id/modeText"
-            android:layout_height="20dp"
+            android:layout_height="wrap_content"
             android:layout_width="match_parent"
-            android:textSize="16sp"
+            android:paddingBottom="5dp"
+            android:paddingTop="5dp"
+            android:textSize="14sp"
             android:layout_marginLeft="10dp"
             android:text="Mode:" />
     </LinearLayout>
-
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="3dp"
+        android:background="#569cd6"/>
     <RelativeLayout
         android:layout_height="fill_parent"
         android:layout_width="match_parent"
