@@ -25,7 +25,7 @@ public class Macros {
 
         selectionHashtable = new Hashtable<String,String>();
         selectionHashtable.put("all","all");
-        selectionHashtable.put("none","none");
+        selectionHashtable.put("none","none" );
         selectionHashtable.put("line","line");
         selectionHashtable.put("word","word");
         selectionHashtable.put("next","next");

@@ -217,7 +217,7 @@ public class PlaceholderReplacer {
      */
     private void replaceAccessor(String[] results) {
         String convertedResult = results[0];
-        this.replaceSelection(convertedResult);
+        this.replaceSelection("\n" + convertedResult);
     }
 
     /**
@@ -229,7 +229,7 @@ public class PlaceholderReplacer {
         int start = SelectionHandler.getInstance().getStartIndex();
         int end = SelectionHandler.getInstance().getEndIndex();
         this.textView.getText().replace(start, end, replacement + " ");
-        if (this.isClass && !this.accessorIsSelected && this.selectionHandler.getInstance().selectWord("XPlaceholderX")) {
+        if (this.isClass && !this.accessorIsSelected && !this.returnValueIsSelected && this.selectionHandler.getInstance().selectWord("XPlaceholderX")) {
             this.replaceSelection(replacement);
         }
     }

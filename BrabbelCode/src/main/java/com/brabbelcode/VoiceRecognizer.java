@@ -59,6 +59,7 @@ public class VoiceRecognizer implements RecognitionListener {
             intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, "en-US");
             intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
 
+
             isSpeaking = false;
             handler = new Handler();
             handler.postDelayed(runnable, 2000);
@@ -288,6 +289,8 @@ public class VoiceRecognizer implements RecognitionListener {
         } else {
             this.replacer.setReadyState(false);
             output.setSelection(output.getSelectionEnd());
+            SelectionHandler.getInstance().setStartIndex(output.getSelectionEnd());
+            SelectionHandler.getInstance().setEndIndex(output.getSelectionEnd());
         }
     }
 }
