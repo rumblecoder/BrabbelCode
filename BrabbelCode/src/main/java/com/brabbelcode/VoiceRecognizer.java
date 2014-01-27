@@ -62,7 +62,6 @@ public class VoiceRecognizer implements RecognitionListener {
 
             isSpeaking = false;
             handler = new Handler();
-            handler.postDelayed(runnable, 2000);
             this.replacer = PlaceholderReplacer.getInstance();
         }
     }
@@ -72,7 +71,7 @@ public class VoiceRecognizer implements RecognitionListener {
         public void run() {
 
             if(!isSpeaking)
-                start();
+                speech.startListening(intent);
 
             handler.postDelayed(this, 2000);
         }
@@ -82,11 +81,15 @@ public class VoiceRecognizer implements RecognitionListener {
      * Methods
      */
     public void start(){
-        speech.startListening(intent);
+        status.setText("Starting voice recognizer...");
+        handler.post(runnable);
     }
 
     public void stop(){
-        speech.stopListening();
+        speech.cancel();
+        handler.removeCallbacks(runnable);
+        isSpeaking = false;
+        status.setText("Voice recognizer is off!");
     }
 
     public void cancel(){
@@ -159,7 +162,7 @@ public class VoiceRecognizer implements RecognitionListener {
             status.setText("Network Error");
         else if(e == SpeechRecognizer.ERROR_NO_MATCH){
             status.setText("No Match");
-            start();
+            speech.startListening(intent);
         }
         else if(e == SpeechRecognizer.ERROR_SERVER)
             status.setText("Server Error");
@@ -259,7 +262,7 @@ public class VoiceRecognizer implements RecognitionListener {
             this.setSelection();
         }
 
-        start();
+        speech.startListening(intent);
 
     }
 

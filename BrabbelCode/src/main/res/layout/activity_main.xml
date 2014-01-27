@@ -19,7 +19,7 @@
             android:onClick="onMicCheckClicked"
             android:paddingBottom="10dp"
             android:paddingTop="10dp"
-            android:button="@drawable/mic" />
+            android:button="@drawable/mic_light" />
         <CheckBox
             android:id="@+id/themeCheck"
             android:layout_width="60dp"
@@ -36,7 +36,7 @@
             android:paddingTop="5dp"
             android:textSize="14sp"
             android:layout_marginLeft="10dp"
-            android:text="Mode:" />
+            android:text="MODE" />
     </LinearLayout>
     <View
         android:layout_width="fill_parent"

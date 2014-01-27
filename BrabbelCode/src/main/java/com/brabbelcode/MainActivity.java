@@ -1,6 +1,7 @@
 package com.brabbelcode;
 
 import android.app.Activity;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
@@ -37,6 +38,12 @@ public class MainActivity extends Activity {
         }
 
         Theme.setLight(this);
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        //here you can handle orientation change
     }
 
     /**

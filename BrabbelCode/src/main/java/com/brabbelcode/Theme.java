@@ -3,8 +3,6 @@ package com.brabbelcode;
 import android.app.Activity;
 import android.graphics.Color;
 import android.widget.CheckBox;
-import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -21,6 +19,7 @@ public class Theme {
         CheckBox checkBox0 = (CheckBox) activity.findViewById(R.id.micCheck);
         checkBox0.setTextColor(Color.argb(255, 0, 0, 0));
         checkBox0.setHighlightColor(Color.argb(255, 0, 0, 0));
+        checkBox0.setButtonDrawable(R.drawable.mic_light);
         CheckBox checkBox1 = (CheckBox) activity.findViewById(R.id.themeCheck);
         checkBox1.setTextColor(Color.argb(255, 0, 0, 0));
         checkBox1.setHighlightColor(Color.argb(255, 0, 0, 0));
@@ -42,6 +41,7 @@ public class Theme {
         CheckBox checkBox0 = (CheckBox) activity.findViewById(R.id.micCheck);
         checkBox0.setTextColor(Color.argb(255, 255, 255, 255));
         checkBox0.setHighlightColor(Color.argb(255, 255, 255, 255));
+        checkBox0.setButtonDrawable(R.drawable.mic_dark);
         CheckBox checkBox1 = (CheckBox) activity.findViewById(R.id.themeCheck);
         checkBox1.setTextColor(Color.argb(255, 255, 255, 255));
         checkBox1.setHighlightColor(Color.argb(255, 255, 255, 255));
