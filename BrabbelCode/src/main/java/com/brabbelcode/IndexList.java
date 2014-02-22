@@ -1,6 +1,7 @@
 package com.brabbelcode;
 
 public class IndexList {
+
     private int start = 0;
     private int end = 0;
 
@@ -24,5 +25,4 @@ public class IndexList {
     public void setEnd(int end) {
         this.end = end;
     }
-
 }

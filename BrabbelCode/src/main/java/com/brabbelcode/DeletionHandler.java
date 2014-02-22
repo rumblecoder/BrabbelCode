@@ -3,15 +3,17 @@ package com.brabbelcode;
 import android.widget.EditText;
 
 public class DeletionHandler {
+
     private static final DeletionHandler instance = new DeletionHandler();
     private EditText textBox;
 
     private DeletionHandler() {
-
     }
+
     public void init(EditText textBox) {
         this.textBox = textBox;
     }
+
     public static DeletionHandler getInstance() {
         return instance;
     }
@@ -19,6 +21,7 @@ public class DeletionHandler {
     public void deleteAll() {
         this.textBox.setText("");
     }
+
     public void deleteSelection() {
         int start = SelectionHandler.getInstance().getStartIndex();
         int end = SelectionHandler.getInstance().getEndIndex();

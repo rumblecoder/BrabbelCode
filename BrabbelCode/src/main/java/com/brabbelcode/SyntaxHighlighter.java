@@ -6,40 +6,44 @@ import android.text.TextWatcher;
 import android.text.style.ForegroundColorSpan;
 import android.widget.EditText;
 
-import java.util.Arrays;
-import java.util.Collection;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class SyntaxHighlighter {
 
-    static Collection<String> KEYWORDS = Arrays.asList("abstract", "assert", "boolean", "break", "byte", "case", "catch", "char", "class", "const",
-            "continue", "default", "do", "double", "else", "enum", "extends",
-            "false", "final", "finally", "float", "for", "goto", "if", "implements", "import",
-            "instanceof", "int", "interface", "long", "native", "new", "null",
-            "package", "private", "protected", "public", "return",
-            "short", "static", "strictfp", "super", "switch", "synchronized", "this", "throw", "throws", "true",
-            "transient", "try", "void", "volatile", "while","string");
+    private static final Pattern KEYWORDS = Pattern.compile(
+            "\\b(abstract|assert|boolean|break|byte|case|catch|char|"+
+                "class|const|continue|default|do|double|else|enum|extends|"+
+                "false|final|finally|float|for|goto|if|implements|import|"+
+                "instanceof|int|interface|long|native|new|null|package|"+
+                "private|protected|public|return|short|static|strictfp|"+
+                "String|super|switch|synchronized|this|throw|throws|true|"+
+                "transient|try|void|volatile|while)\\b" );
 
-    static Pattern WORD_PATTERN = Pattern.compile("\\w+");
+    private static final Pattern CHARS = Pattern.compile(
+            "'.*'|\".*\"" );
+
+    private static final Pattern COMMENTS = Pattern.compile(
+            "/\\*(?:.|[\\n\\r])*?\\*/|//.*" );
 
     public static void applySyntaxHighlighting(Spannable spannable) {
         for(ForegroundColorSpan span : spannable.getSpans(0,  spannable.length(), ForegroundColorSpan.class)) {
             spannable.removeSpan(span);
         }
 
-        Matcher matcher = WORD_PATTERN.matcher(spannable);
+        Matcher matcher = KEYWORDS.matcher(spannable);
         while (matcher.find()) {
-            Integer color = null;
-            String match = matcher.group();
+            spannable.setSpan(new ForegroundColorSpan(Theme.getKeywordsColor()), matcher.start(), matcher.end(), 0);
+        }
 
-            if (KEYWORDS.contains(match)) {
-                color = Theme.getKeywordColor();
-            }
+        matcher = CHARS.matcher(spannable);
+        while (matcher.find()) {
+            spannable.setSpan(new ForegroundColorSpan(Theme.getCharsColor()), matcher.start(), matcher.end(), 0);
+        }
 
-            if (color!=null) {
-                spannable.setSpan(new ForegroundColorSpan(color), matcher.start(), matcher.end(), 0);
-            }
+        matcher = COMMENTS.matcher(spannable);
+        while (matcher.find()) {
+            spannable.setSpan(new ForegroundColorSpan(Theme.getCommentsColor()), matcher.start(), matcher.end(), 0);
         }
     }
 

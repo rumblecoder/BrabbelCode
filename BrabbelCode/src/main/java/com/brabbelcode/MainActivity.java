@@ -46,9 +46,6 @@ public class MainActivity extends Activity {
         //here you can handle orientation change
     }
 
-    /**
-     * Events
-     */
     public void onMicCheckClicked(View view) {
         if(((CheckBox)view).isChecked())
             recognizer.stop();
@@ -66,5 +63,4 @@ public class MainActivity extends Activity {
             SyntaxHighlighter.applySyntaxHighlighting(codeEditor.getText());
         }
     }
-
 }

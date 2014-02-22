@@ -9,10 +9,15 @@ import android.graphics.Typeface;
 import android.util.AttributeSet;
 import android.widget.EditText;
 
-/**
- * Created by andypf on 20.11.13.
- */
 public class LineNumbers extends EditText {
+
+    protected Paint nPaintNumbers;
+    protected int nPaddingDP = 6;
+    protected int nPadding, nLinePadding;
+    protected float nScale;
+    protected Rect nDrawingRect, nLineBounds;
+    public static int TEXT_SIZE = 14;
+    protected Point nMaxSize;
 
     public LineNumbers(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -77,7 +82,6 @@ public class LineNumbers extends EditText {
             nMaxSize.y = Math.max(nMaxSize.y + nPadding - nDrawingRect.height(), 0);
         }
         super.onDraw(canvas);
-
     }
 
     public void sets(){
@@ -85,21 +89,4 @@ public class LineNumbers extends EditText {
         setTextSize(TEXT_SIZE);
         nPaintNumbers.setTextSize(this.getTextSize());
     }
-
-    protected Paint nPaintNumbers;
-
-    protected int nPaddingDP = 6;
-
-    protected int nPadding, nLinePadding;
-
-    protected float nScale;
-
-    protected Rect nDrawingRect, nLineBounds;
-
-    public static int TEXT_SIZE=14;
-
-    protected Point nMaxSize;
-
-
-
 }

@@ -9,6 +9,9 @@ import android.widget.TextView;
 
 import java.util.LinkedList;
 
+/**
+ * Source: https://code.google.com/p/android/issues/detail?id=6458#c123
+ */
 public class CodeHistory {
 
     private static final CodeHistory instance = new CodeHistory();
@@ -18,7 +21,6 @@ public class CodeHistory {
     private TextView textView;
 
     private CodeHistory() {
-
     }
 
     public static CodeHistory getInstance() {
@@ -134,7 +136,6 @@ public class CodeHistory {
     }
 
     private boolean doRestorePersistentState(SharedPreferences sp, String prefix) {
-
         String hash = sp.getString(prefix + ".hash", null);
         if (hash == null) {
             // No state to be restored.
@@ -241,6 +242,7 @@ public class CodeHistory {
      * Represents the changes performed by a single edit operation.
      */
     private final class EditItem {
+
         private final int start;
         private final CharSequence before;
         private final CharSequence after;

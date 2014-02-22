@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class VoiceRecognizer implements RecognitionListener {
@@ -48,8 +49,7 @@ public class VoiceRecognizer implements RecognitionListener {
     /**
      * Init
      */
-    private void init()
-    {
+    private void init(){
         if(isPresent){
             speech = SpeechRecognizer.createSpeechRecognizer(context);
             speech.setRecognitionListener(this);
@@ -58,7 +58,6 @@ public class VoiceRecognizer implements RecognitionListener {
             intent.putExtra(RecognizerIntent.EXTRA_CALLING_PACKAGE, context.getPackageName());
             intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, "en-US");
             intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
-
 
             isSpeaking = false;
             handler = new Handler();
@@ -69,7 +68,6 @@ public class VoiceRecognizer implements RecognitionListener {
     private Runnable runnable = new Runnable() {
         @Override
         public void run() {
-
             if(!isSpeaking)
                 speech.startListening(intent);
 
@@ -78,7 +76,7 @@ public class VoiceRecognizer implements RecognitionListener {
     };
 
     /**
-     * Methods
+     * Public Methods
      */
     public void start(){
         status.setText("Starting voice recognizer...");
@@ -100,9 +98,6 @@ public class VoiceRecognizer implements RecognitionListener {
         speech.destroy();
     }
 
-    /**
-     * Setter
-     */
     public void setOutput(EditText editText){
         this.output = editText;
 
@@ -119,13 +114,7 @@ public class VoiceRecognizer implements RecognitionListener {
         status = textView;
     }
 
-    /**
-     * Getter
-     */
     public boolean getIsPresent(){
-
-
-
         return isPresent;
     }
 
@@ -133,27 +122,23 @@ public class VoiceRecognizer implements RecognitionListener {
      * Events
      */
     @Override
-    public void onBeginningOfSpeech()
-    {
+    public void onBeginningOfSpeech(){
         isSpeaking = true;
         status.setText("You are speaking...");
     }
 
     @Override
-    public void onBufferReceived(byte[] arg0)
-    {
+    public void onBufferReceived(byte[] arg0){
     }
 
     @Override
-    public void onEndOfSpeech()
-    {
+    public void onEndOfSpeech(){
         isSpeaking = false;
         status.setText("As you wish, my lord.");
     }
 
     @Override
-    public void onError(int e)
-    {
+    public void onError(int e){
         if(e == SpeechRecognizer.ERROR_AUDIO)
             status.setText("Audio Error");
         else if(e == SpeechRecognizer.ERROR_CLIENT)
@@ -169,47 +154,51 @@ public class VoiceRecognizer implements RecognitionListener {
     }
 
     @Override
-    public void onEvent(int arg0, Bundle arg1)
-    {
+    public void onEvent(int arg0, Bundle arg1){
     }
 
     @Override
-    public void onPartialResults(Bundle arg0)
-    {
+    public void onPartialResults(Bundle arg0){
     }
 
     @Override
-    public void onReadyForSpeech(Bundle arg0)
-    {
+    public void onReadyForSpeech(Bundle arg0){
         isSpeaking = false;
         status.setText("I´m listening...");
     }
 
     @Override
-    public void onResults(Bundle data)
-    {
+    public void onResults(Bundle data){
         ArrayList<String> matches = data.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
         InputTranslator translator = new InputTranslator(false);
 
         String translatorResult = "";
         if(matches != null && !this.replacer.getReadystate())
         {
-
             boolean matchString = false;
 
             for(String s:matches)
             {
-                String [] speechResultArray = s.split(" ");
+                String[] speechResultArray = s.split(" ");
                 speechResultArray = Mode.getInstance().extractMode(speechResultArray);
                 Enums.MODE mode = Mode.getInstance().getMode();
 
                 if(mode == Enums.MODE.CREATE) {
                     translatorResult = translator.translateCreate(speechResultArray);
-                    // output.setText(output.getText() + "\n"+ translatorResult);
-                    output.getText().insert(output.getSelectionStart(), translatorResult + "\n");
-                    this.replacer.setCommandToModify(translatorResult);
-                    this.replacer.setReadyState(true);
-                    this.setSelection();
+                    if(translatorResult.equals("comment")){
+                        StringBuilder builder = new StringBuilder();
+                        for(int i = 1; i < speechResultArray.length; i++) {
+                            builder.append(" " + speechResultArray[i]);
+                        }
+                        output.getText().insert(output.getSelectionStart(), "//" + builder.toString() + " \n");
+                        this.setSelection();
+                    }
+                    else{
+                        output.getText().insert(output.getSelectionStart(), translatorResult + "\n");
+                        this.replacer.setCommandToModify(translatorResult);
+                        this.replacer.setReadyState(true);
+                        this.setSelection();
+                    }
                     break;
                 } else if(mode == Enums.MODE.SELECT) {
                     translatorResult = translator.translateSelect(speechResultArray);
@@ -235,11 +224,9 @@ public class VoiceRecognizer implements RecognitionListener {
                     break;
                 } else if(mode == Enums.MODE.FREE) {
                     translatorResult = translator.translateFree(speechResultArray);
-                    // output.setText(output.getText() + "\n" + translatorResult);
                     output.getText().insert(output.getSelectionStart(), translatorResult + "\n");
                     break;
-                }
-                  else if(mode == Enums.MODE.UNDO) {
+                } else if(mode == Enums.MODE.UNDO) {
                     CodeHistory.getInstance().undo();
                     break;
                 } else if(mode == Enums.MODE.REDO) {
@@ -263,12 +250,10 @@ public class VoiceRecognizer implements RecognitionListener {
         }
 
         speech.startListening(intent);
-
     }
 
     @Override
-    public void onRmsChanged(float arg0)
-    {
+    public void onRmsChanged(float arg0){
     }
 
     /**

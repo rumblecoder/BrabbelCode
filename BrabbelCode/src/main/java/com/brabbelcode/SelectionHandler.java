@@ -5,6 +5,7 @@ import android.widget.EditText;
 import java.util.ArrayList;
 
 public class SelectionHandler {
+
     private static final SelectionHandler instance = new SelectionHandler();
     private EditText textBox;
     private int start = 0;
@@ -15,13 +16,13 @@ public class SelectionHandler {
     private IndexList currentWord = new IndexList(0, 0);
     private String word = "";
 
-
     private SelectionHandler() {
-
     }
+
     public void init(EditText textBox) {
         this.textBox = textBox;
     }
+
     public static SelectionHandler getInstance() {
         return instance;
     }
@@ -30,25 +31,32 @@ public class SelectionHandler {
         this.start = start;
         this.calculateLength();
     }
+
     public void setEndIndex(int end) {
         this.end = end;
         this.calculateLength();
     }
+
     public int getStartIndex() {
         return this.start;
     }
+
     public int getEndIndex() {
         return this.end;
     }
+
     public int getSelectionLength() {
         return this.length;
     }
+
     public void selectAll() {
         this.textBox.selectAll();
     }
+
     public void selectNone() {
         this.textBox.setSelection(this.textBox.getText().length());
     }
+
     public void selectLine(String[] line) {
         if(line.length > 1 && line[1] != null) {
             if(Util.isInteger(line[1])) {
@@ -110,6 +118,7 @@ public class SelectionHandler {
             return false;
         }
     }
+
     public void createIndex(String word) {
         this.resetIndex();
         String regex = "(?i:" + word + ")";
@@ -141,9 +150,11 @@ public class SelectionHandler {
         this.currentIndex = 0;
         this.indexList.clear();
     }
+
     private void calculateLength() {
         this.length = this.end - this.start;
     }
+
     private int countLines(String str){
         String[] lines = str.split("\r\n|\r|\n");
         return  lines.length;

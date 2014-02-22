@@ -1,41 +1,35 @@
 package com.brabbelcode;
 
-
 import java.util.Hashtable;
 
-/**
- * Created by andypf on 03.11.13.
- */
 public class InputTranslator {
 
     private double tolerance;
     private Macros macros;
     private boolean easyMode;
 
-    public InputTranslator(boolean useTolerance)
-    {
+    public InputTranslator(boolean useTolerance){
         this.tolerance = 0.6;
         this.macros = new Macros();
         this.easyMode = useTolerance;
     }
 
-    public String translateCreate(String[] speechResultArray)
-    {
+    public String translateCreate(String[] speechResultArray){
         String result = translateFromHashtable(convertStringArrayToString(speechResultArray),macros.getCreateHashtable());
         return result;
     }
-    public String translateSelect(String[] speechResultArray)
-    {
+
+    public String translateSelect(String[] speechResultArray){
         String result = translateFromHashtable(convertStringArrayToString(speechResultArray),macros.getSelectionHashtable());
         return result;
     }
-    public String translateDelete(String[] speechResultArray)
-    {
+
+    public String translateDelete(String[] speechResultArray){
         String result = translateFromHashtable(convertStringArrayToString(speechResultArray),macros.getDeleteHashtable());
         return result;
     }
-    public String translateFree(String[] speechResultArray)
-    {
+
+    public String translateFree(String[] speechResultArray){
         String result = "";
 
         for(int i = 0; i < speechResultArray.length; i++) {
@@ -44,9 +38,7 @@ public class InputTranslator {
         return result;
     }
 
-
-    private String translateFromHashtable(String speechResult, Hashtable<String,String> commandHashtable)
-    {
+    private String translateFromHashtable(String speechResult, Hashtable<String,String> commandHashtable){
         String result = "";
         int levDist = 1000;
         String priorKey = null;
@@ -71,13 +63,10 @@ public class InputTranslator {
             }
 
         }
-
-
         return result;
     }
 
-    private String convertStringArrayToString(String[] stringArray)
-    {
+    private String convertStringArrayToString(String[] stringArray){
         StringBuilder strBuilder = new StringBuilder();
         for(String s :stringArray)
         {
@@ -88,8 +77,7 @@ public class InputTranslator {
         return result;
     }
 
-    private boolean compareWords(String speechResult, String originalWord)
-    {
+    private boolean compareWords(String speechResult, String originalWord){
         int levDist = LevenshteinDistance.computeLevenshteinDistance(speechResult, originalWord);
         if(levDist <= originalWord.length()*tolerance)
             return true;

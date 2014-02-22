@@ -54,21 +54,24 @@ public class Theme {
         isDark = true;
     }
 
-    /*
-    Light
-    Keywords: (0, 0, 255)
-    Comment: (0, 128, 0)
-    Other: (43, 145, 175)
-
-    Dark
-    Keywords: (86, 156, 214)
-    Comment: (96, 139, 78)
-    Other: (78, 201, 176)
-    */
-    public static int getKeywordColor(){
+    public static int getKeywordsColor(){
         if(!isDark)
             return Color.argb(255, 0, 0, 255);
         else
             return Color.argb(255, 86, 156, 214);
+    }
+
+    public static int getCommentsColor(){
+        if(!isDark)
+            return Color.argb(255, 0, 128, 0);
+        else
+            return Color.argb(255, 87, 166, 74);
+    }
+
+    public static int getCharsColor(){
+        if(!isDark)
+            return Color.argb(255, 163, 21, 21);
+        else
+            return Color.argb(255, 214, 157, 133);
     }
 }

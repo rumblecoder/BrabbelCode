@@ -1,20 +1,14 @@
 package com.brabbelcode;
 
-/**
- * Created by andypf on 05.11.13.
- */
 public class LevenshteinDistance {
-
 
     private static double tolerance = 0.2;
 
-    private static int minimum(int a, int b, int c)
-    {
+    private static int minimum(int a, int b, int c){
         return Math.min(Math.min(a, b), c);
     }
 
-    public static int computeLevenshteinDistance(CharSequence str1, CharSequence str2)
-    {
+    public static int computeLevenshteinDistance(CharSequence str1, CharSequence str2){
         int[][] distance = new int[str1.length() + 1][str2.length() + 1];
         for (int i = 0; i <= str1.length(); i++)
             distance[i][0] = i;

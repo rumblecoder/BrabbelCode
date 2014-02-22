@@ -2,9 +2,6 @@ package com.brabbelcode;
 
 import android.widget.EditText;
 
-/**
- * Created by Chris on 26.11.13.
- */
 public class PlaceholderReplacer {
 
     private String commandToModify;
