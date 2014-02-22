@@ -14,12 +14,14 @@ BrabbelCode provides five different modes for programming, that are started with
 * create integer
 * create string
 * create double
+* create comment ...
+* create new line
 
 ### Select
 * select all
 * select none
-* select line ___
-* select word ___
+* select line ...
+* select word ...
 * select next
 
 ### Delete
@@ -28,6 +30,10 @@ BrabbelCode provides five different modes for programming, that are started with
 
 ### Undo/Redo
 * undo/redo
+
+Screenshots
+-----------
+![](BrabbelCode/images/Screenshots.png)
 
 Authors
 -------
